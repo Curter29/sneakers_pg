@@ -3,7 +3,12 @@ module Sneakers
     def do_work(delivery_info, metadata, msg, handler)
         __initial_reconnect ||= ActiveRecord::Base.connection.reconnect! && :done
 
-        super(delivery_info, metadata, msg, handler)
+        # https://github.com/jondot/sneakers/blob/master/lib/sneakers/worker.rb#L46
+        worker_trace "Working off: #{msg.inspect}"
+
+        @pool.post do
+          process_work(delivery_info, metadata, msg, handler)
+        end
       rescue PG::ConnectionBad, PG::UnableToSend => e
         sleep 2
         ActiveRecord::Base.connection.reconnect!

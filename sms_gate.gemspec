@@ -10,4 +10,6 @@ Gem::Specification.new do |s|
   s.description = %q{}
 
   s.require_paths = ['lib']
+
+  s.add_dependency 'sneakers', '>= 2.7.0'
 end
