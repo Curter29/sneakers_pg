@@ -1,11 +1,25 @@
 PATH
   remote: .
   specs:
-    sneakers_pg (0.0.1)
+    sneakers_pg (0.0.2)
+      sneakers (>= 2.7.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    amq-protocol (2.3.0)
+    bunny (2.9.2)
+      amq-protocol (~> 2.3.0)
+    concurrent-ruby (1.0.5)
+    serverengine (2.0.6)
+      sigdump (~> 0.2.2)
+    sigdump (0.2.4)
+    sneakers (2.7.0)
+      bunny (~> 2.9.2)
+      concurrent-ruby (~> 1.0)
+      serverengine (~> 2.0.5)
+      thor
+    thor (0.20.0)
 
 PLATFORMS
   ruby
@@ -14,4 +28,4 @@ DEPENDENCIES
   sneakers_pg!
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
