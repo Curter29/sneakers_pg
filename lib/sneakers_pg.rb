@@ -11,7 +11,9 @@ module Sneakers
         end
       rescue PG::ConnectionBad, PG::UnableToSend => e
         sleep 2
+
         ActiveRecord::Base.connection.reconnect!
+        Sneakers::CONFIG[:hooks][:after_pg_broken].call if Sneakers::CONFIG[:hooks][:after_pg_broken]
 
         work_rescue(e)
         logger.error(e)
